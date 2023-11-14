@@ -1,0 +1,88 @@
+// Declares an abstract class named Duck. This class cannot be instantiated and is meant to be a base for other duck types.
+public abstract class Duck {
+    // Declares a variable of type FlyBehaviour. It will hold a reference to a specific flying behavior for a duck.
+    FlyBehaviour flyBehaviour;
+
+    // Declares a variable of type QuackBehaviour. It will hold a reference to a specific quacking behavior for a duck.
+    // Note: The variable name should ideally be in lowercase (quackBehaviour) to follow Java naming conventions.
+    QuackBehaviour quackBehaviour;
+
+    // Default constructor for Duck. It doesn't do anything specific in this case.
+    public Duck() { } 
+
+    // An abstract method display. Subclasses of Duck are required to provide their own implementation of this method.
+    public abstract void display(); 
+
+    // A method that delegates the flying behavior. It calls the fly method on the flyBehaviour object.
+    public void performFly() {
+        flyBehaviour.fly();
+    }
+
+    // A method that delegates the quacking behavior. It calls the quack method on the quackBehaviour object.
+    public void performQuack() {
+        quackBehaviour.quack();
+    }
+
+    // A method for all ducks to swim. This implementation is common to all ducks and prints a message.
+    public void swim() {
+        System.out.println("All ducks float, even decoys"); 
+    }
+}
+
+// Defines the FlyBehaviour interface. This interface is used to represent the flying behavior of ducks.
+public interface FlyBehaviour {
+    // An abstract method fly that must be implemented by any class that implements this interface.
+    public void fly();
+}
+
+// A class that implements the FlyBehaviour interface, representing a flying behavior with wings.
+public class FlyWithWings implements FlyBehaviour {
+    // The implementation of the fly method for ducks that fly with wings.
+    public void fly() {
+        // Prints a message to the console indicating that this duck is capable of flying.
+        System.out.println("I'm flying");
+    }
+}
+
+// A class that implements the FlyBehaviour interface, representing a flying behavior for ducks that cannot fly.
+public class FlyNoWay implements FlyBehaviour {
+    // The implementation of the fly method for ducks that cannot fly.
+    public void fly() {
+        // Prints a message to the console indicating that this duck cannot fly.
+        System.out.println("I can't fly");
+    }
+}
+
+public interface QuackBehaviour{
+	public void quack(); 
+}
+public class Quack implements QuackBehaviour{
+	public void quack(){
+		System.out.println("Quack");
+	}
+}
+public class MuteQuack implements QuackBehaviour{
+	public void quack(){
+		System.out.println("silence");
+	}
+}
+public class Squeak implements QuackBehaviour{
+	public void quack(){
+		System.out.println("Squeak"); 
+	}
+}
+// The MiniDuckSimulator class contains the main method to demonstrate the behavior of Duck objects.
+public class MiniDuckSimulator {
+
+    // The main method is the entry point of the program.
+    public static void main(String[] args) {
+        // Creates a new MallardDuck object. MallardDuck is a subclass of Duck that specifies its own flying and quacking behavior.
+        Duck mallard = new MallardDuck();
+
+        // Invokes the performQuack method on the mallard object. This method is inherited from the Duck class and will exhibit the quacking behavior specific to MallardDuck.
+        mallard.performQuack();
+
+        // Invokes the performFly method on the mallard object. Similar to performQuack, this method calls the flying behavior as defined in MallardDuck.
+        mallard.performFly();
+    }
+}
